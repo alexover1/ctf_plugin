@@ -5,6 +5,7 @@ object ItemAbilityRegistry {
         FireWandAbility,
         LevitationWandAbility,
         ShadowstepAbility,
+        HealBeamAbility,
     )
 
     private val abilityMap = abilities.associateBy { it.name }
