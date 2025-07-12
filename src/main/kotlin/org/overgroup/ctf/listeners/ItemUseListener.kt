@@ -1,32 +1,22 @@
 package org.overgroup.ctf.listeners
 
+import org.overgroup.ctf.Keys
+import org.overgroup.ctf.abilities.*
+
 import org.bukkit.Tag
 import org.bukkit.Material
 import org.bukkit.event.Listener
 import org.bukkit.event.EventHandler
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.TextComponent
-import net.kyori.adventure.text.TranslatableComponent
 import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.inventory.ItemStack
-import org.overgroup.ctf.abilities.*
-
-const val FIRE_WAND = "Fire Wand"
-const val LEVITATION_WAND = "Levitation Wand"
-const val HEAL_BEAM = "Heal Beam"
-const val HUNTERS_EYE = "Hunter's Eye"
-const val SHADOWSTEP = "Shadowstep"
-const val WOLF_HORN = "Wolf Horn"
-const val BATTLE_BUGLE = "Battle Bugle"
 
 val abilities = mapOf(
-    FIRE_WAND to ::fireWandAbility,
-    LEVITATION_WAND to ::levitationWandAbility,
-    HEAL_BEAM to ::healBeamAbility,
-    HUNTERS_EYE to ::huntersEyeAbility,
-    SHADOWSTEP to ::shadowStepAbility,
-    WOLF_HORN to ::wolfHornAbility,
-    BATTLE_BUGLE to ::battleBugleAbility,
+    Keys.FIRE_WAND to ::fireWandAbility,
+    Keys.LEVITATION_WAND to ::levitationWandAbility,
+    Keys.HEAL_BEAM to ::healBeamAbility,
+    Keys.HUNTERS_EYE to ::huntersEyeAbility,
+    Keys.SHADOWSTEP to ::shadowStepAbility,
+    Keys.WOLF_HORN to ::wolfHornAbility,
+    Keys.BATTLE_BUGLE to ::battleBugleAbility,
 )
 
 class ItemUseListener : Listener {
@@ -41,23 +31,15 @@ class ItemUseListener : Listener {
                 }
             }
             if (!player.hasCooldown(item)) {
-                item.getItemNameAsString()?.let { abilities[it]?.invoke(player, item) }
+                val meta = item.itemMeta ?: return
+                val container = meta.persistentDataContainer
+
+                for (key in container.keys) {
+                    abilities[key]?.invoke(player, item)
+                }
             }
         }
     }
-}
-
-fun ItemStack.getItemNameAsString(): String? {
-    if (itemMeta.hasItemName()) {
-        return itemMeta.itemName().getInnerContent()
-    }
-    return null
-}
-
-fun Component.getInnerContent(): String? = when (this) {
-    is TextComponent -> content()
-    is TranslatableComponent -> key()
-    else -> null
 }
 
 private val interactableTags = arrayOf(Tag.DOORS, Tag.TRAPDOORS, Tag.BUTTONS, Tag.BEDS, Tag.SIGNS, Tag.FENCE_GATES, Tag.ANVIL, Tag.SHULKER_BOXES)
@@ -65,6 +47,7 @@ private val interactableTags = arrayOf(Tag.DOORS, Tag.TRAPDOORS, Tag.BUTTONS, Ta
 fun Material.hasBlockInteraction(): Boolean {
     return when (this) {
         Material.CHEST -> return true
+        Material.ENDER_CHEST -> return true
         Material.TRAPPED_CHEST -> return true
         Material.BARREL -> return true
         Material.FURNACE -> return true

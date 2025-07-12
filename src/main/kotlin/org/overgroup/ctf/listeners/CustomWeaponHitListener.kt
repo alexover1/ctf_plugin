@@ -1,11 +1,13 @@
 package org.overgroup.ctf.listeners
 
+import org.overgroup.ctf.Keys
+import org.overgroup.ctf.abilities.*
+
 import org.bukkit.event.Listener
 import org.bukkit.entity.LivingEntity
 import org.bukkit.event.EventHandler
 import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.potion.PotionEffectType
-import org.overgroup.ctf.abilities.*
 
 class CustomWeaponHitListener : Listener {
     @EventHandler
@@ -15,13 +17,9 @@ class CustomWeaponHitListener : Listener {
         val damager = event.damager as? LivingEntity ?: return
         val usedItem = damager.equipment?.itemInMainHand ?: return
 
-        val itemName = usedItem.getItemNameAsString()
-        if (abilities.containsKey(itemName)) {
-            when (itemName) {
-                LEVITATION_WAND -> {
-                    levitationWandLaunch(entity)
-                }
-            }
+        val meta = usedItem.itemMeta ?: return
+        if (meta.persistentDataContainer.has(Keys.LEVITATION_WAND)) {
+            levitationWandLaunch(entity)
         }
     }
 }

@@ -5,15 +5,16 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
-import org.overgroup.ctf.commands.dropSheep
-import org.overgroup.ctf.commands.sheepHat
+import org.overgroup.ctf.commands.*
+
+private val commands = mapOf(
+    "sheephat" to ::sheepHat,
+    "dropsheep" to ::dropSheep,
+    "firewand" to ::fireWandItemCommand,
+    "levwand" to ::levitationWandItemCommand,
+)
 
 class CommandListener : CommandExecutor, TabCompleter {
-    val commands = mapOf(
-        "sheephat" to ::sheepHat,
-        "dropsheep" to ::dropSheep,
-    )
-
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         val player = sender as? Player
         if (player == null) {
