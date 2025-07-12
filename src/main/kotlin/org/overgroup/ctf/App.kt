@@ -29,6 +29,7 @@ class App : JavaPlugin() {
         server.pluginManager.registerEvents(ItemUseListener(), this)
         server.pluginManager.registerEvents(PlayerFallDamageListener(), this)
         server.pluginManager.registerEvents(CustomWeaponHitListener(), this)
+        server.pluginManager.registerEvents(PlayerDropItemListener(), this)
 
         logger.info("Registered events")
     }
