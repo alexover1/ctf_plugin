@@ -3,12 +3,6 @@ version: '1.0-SNAPSHOT'
 main: org.overgroup.ctf.App
 api-version: '1.21'
 commands:
-  firewand:
-    description: "Gives you the Fire Wand"
-    usage: "/firewand"
-  sheephat:
-    description: "Summons a sheep on your head"
-    usage: "/sheephat"
-  dropsheep:
-    description: "Drops the top sheep on your head"
-    usage: "/dropsheep"
+  ctf:
+    description: "Main command for the CTF game"
+    usage: "/ctf <subcommand>"
