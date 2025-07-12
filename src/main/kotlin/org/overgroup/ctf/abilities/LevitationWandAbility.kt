@@ -8,8 +8,6 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-val LEVITATION_WAND = "Levitation Wand"
-
 fun levitationWandAbility(player: Player, item: ItemStack) {
     levitationWandLaunch(player)
 

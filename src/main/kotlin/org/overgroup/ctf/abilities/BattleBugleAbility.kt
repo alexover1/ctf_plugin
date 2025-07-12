@@ -5,8 +5,6 @@ import org.bukkit.inventory.ItemStack
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-val BATTLE_BUGLE = "Battle Bugle"
-
 fun battleBugleAbility(player: Player, item: ItemStack) {
     val team = player.scoreboard.getEntityTeam(player)
     val entities = player.world.getNearbyLivingEntities(player.location, 15.0).filter {

@@ -1,23 +1,31 @@
 package org.overgroup.ctf.listeners
 
+import org.bukkit.Tag
+import org.bukkit.Material
+import org.bukkit.event.Listener
+import org.bukkit.event.EventHandler
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.TextComponent
 import net.kyori.adventure.text.TranslatableComponent
-import org.bukkit.Material
-import org.bukkit.Tag
-import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.ItemStack
 import org.overgroup.ctf.abilities.*
 
+const val FIRE_WAND = "Fire Wand"
+const val LEVITATION_WAND = "Levitation Wand"
+const val HEAL_BEAM = "Heal Beam"
+const val HUNTERS_EYE = "Hunter's Eye"
+const val SHADOWSTEP = "Shadowstep"
+const val WOLF_HORN = "Wolf Horn"
+const val BATTLE_BUGLE = "Battle Bugle"
+
 val abilities = mapOf(
-    "Fire Wand" to ::fireWandAbility,
+    FIRE_WAND to ::fireWandAbility,
     LEVITATION_WAND to ::levitationWandAbility,
-    "Heal Beam" to ::healBeamAbility,
-    "Hunter's Eye" to ::huntersEyeAbility,
-    "Shadowstep" to ::shadowStepAbility,
-    "Wolf Horn" to ::wolfHornAbility,
+    HEAL_BEAM to ::healBeamAbility,
+    HUNTERS_EYE to ::huntersEyeAbility,
+    SHADOWSTEP to ::shadowStepAbility,
+    WOLF_HORN to ::wolfHornAbility,
     BATTLE_BUGLE to ::battleBugleAbility,
 )
 
